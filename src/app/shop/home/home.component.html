@@ -1,0 +1,57 @@
+<!-- ##### Shop Grid Area Start ##### -->
+<section class="shop_grid_area section-padding-80">
+  <div class="container">
+      <div class="row">
+          <div class="col-12 col-md-4 col-lg-3">
+              <div class="shop_sidebar_area">
+
+                <!-- Category widget -->
+                <app-widget-category></app-widget-category>
+                <!-- End Category widget -->
+
+                <!-- Filter widget -->
+                <app-widget-filter></app-widget-filter>
+                <!-- End Filter widget -->
+
+              </div>
+          </div>
+
+          <div class="col-12 col-md-8 col-lg-9">
+              <div class="shop_grid_product_area">
+                  <div class="row">
+                      <div class="col-12">
+                          <div class="product-topbar d-flex align-items-center justify-content-between">
+                              <!-- Total Products -->
+                              <div class="total-products">
+                                  <p><span>186</span> products found</p>
+                              </div>
+                              <!-- Sorting -->
+                              <div class="product-sorting d-flex">
+                                  <p>Sort by:</p>
+                                  <form action="#" method="get">
+                                      <select name="select" id="sortByselect">
+                                          <option value="value">Highest Rated</option>
+                                          <option value="value">Newest</option>
+                                          <option value="value">Price: $$ - $</option>
+                                          <option value="value">Price: $ - $$</option>
+                                      </select>
+                                      <input type="submit" class="d-none" value="">
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                
+                <!-- Product widget -->
+                <app-widget-product></app-widget-product>
+                <!-- End Product widget -->
+                  
+              </div>
+              <!-- Pagination -->
+              <app-pagination></app-pagination>
+              <!-- End Pagination -->
+          </div>
+      </div>
+  </div>
+</section>
+<!-- ##### Shop Grid Area End ##### -->
