@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SharedService } from '../../shared.service';
+import { ApiService } from '../../../core/api.service';
+import { CategoryService } from '../../services/category/category.service';
 
 @Component({
   selector: 'app-header',
@@ -13,16 +15,23 @@ export class HeaderComponent implements OnInit {
   isMobile: boolean = false;
   cart: boolean = false;
   activeMenu: string = null;
+  allCategories;
 
   @ViewChild('classynav') classynav;
 
   constructor(
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private http: ApiService,
+    private categoryService: CategoryService
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.sharedService.isMobile.subscribe(isMobile => this.isMobile = isMobile);
     this.sharedService.cartToggle.subscribe(cart => this.cart = cart);
+
+    this.allCategories = await this.categoryService.getAllCategory();
+    this.sharedService.categories.next(this.allCategories);
+    localStorage.setItem('categories', JSON.stringify(this.allCategories));
   }
 
   cartToggle() {
@@ -36,8 +45,6 @@ export class HeaderComponent implements OnInit {
     } else {
       this.activeMenu = name;
     }
-    console.log('this.activeMenu', this.activeMenu);
-    console.log('classy', this.classynav);
-  }
 
+  }
 }

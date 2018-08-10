@@ -7,54 +7,12 @@
   <div class="catagories-menu">
       <ul id="menu-content2" class="menu-content collapse show">
           <!-- Single Item -->
-          <li data-toggle="collapse" data-target="#clothing">
-              <a href="javascript:void(0)">clothing</a>
-              <ul class="sub-menu collapse show" id="clothing">
-                  <li><a href="javascript:void(0)">All</a></li>
-                  <li><a href="javascript:void(0)">Bodysuits</a></li>
-                  <li><a href="javascript:void(0)">Dresses</a></li>
-                  <li><a href="javascript:void(0)">Hoodies &amp; Sweats</a></li>
-                  <li><a href="javascript:void(0)">Jackets &amp; Coats</a></li>
-                  <li><a href="javascript:void(0)">Jeans</a></li>
-                  <li><a href="javascript:void(0)">Pants &amp; Leggings</a></li>
-                  <li><a href="javascript:void(0)">Rompers &amp; Jumpsuits</a></li>
-                  <li><a href="javascript:void(0)">Shirts &amp; Blouses</a></li>
-                  <li><a href="javascript:void(0)">Shirts</a></li>
-                  <li><a href="javascript:void(0)">Sweaters &amp; Knits</a></li>
-              </ul>
-          </li>
-          <!-- Single Item -->
-          <li data-toggle="collapse" data-target="#shoes" class="collapsed">
-              <a href="javascript:void(0)">shoes</a>
-              <ul class="sub-menu collapse" id="shoes">
-                  <li><a href="javascript:void(0)">All</a></li>
-                  <li><a href="javascript:void(0)">Bodysuits</a></li>
-                  <li><a href="javascript:void(0)">Dresses</a></li>
-                  <li><a href="javascript:void(0)">Hoodies &amp; Sweats</a></li>
-                  <li><a href="javascript:void(0)">Jackets &amp; Coats</a></li>
-                  <li><a href="javascript:void(0)">Jeans</a></li>
-                  <li><a href="javascript:void(0)">Pants &amp; Leggings</a></li>
-                  <li><a href="javascript:void(0)">Rompers &amp; Jumpsuits</a></li>
-                  <li><a href="javascript:void(0)">Shirts &amp; Blouses</a></li>
-                  <li><a href="javascript:void(0)">Shirts</a></li>
-                  <li><a href="javascript:void(0)">Sweaters &amp; Knits</a></li>
-              </ul>
-          </li>
-          <!-- Single Item -->
-          <li data-toggle="collapse" data-target="#accessories" class="collapsed">
-              <a href="javascript:void(0)">accessories</a>
-              <ul class="sub-menu collapse" id="accessories">
-                  <li><a href="javascript:void(0)">All</a></li>
-                  <li><a href="javascript:void(0)">Bodysuits</a></li>
-                  <li><a href="javascript:void(0)">Dresses</a></li>
-                  <li><a href="javascript:void(0)">Hoodies &amp; Sweats</a></li>
-                  <li><a href="javascript:void(0)">Jackets &amp; Coats</a></li>
-                  <li><a href="javascript:void(0)">Jeans</a></li>
-                  <li><a href="javascript:void(0)">Pants &amp; Leggings</a></li>
-                  <li><a href="javascript:void(0)">Rompers &amp; Jumpsuits</a></li>
-                  <li><a href="javascript:void(0)">Shirts &amp; Blouses</a></li>
-                  <li><a href="javascript:void(0)">Shirts</a></li>
-                  <li><a href="javascript:void(0)">Sweaters &amp; Knits</a></li>
+          <li data-toggle="collapse" *ngFor="let category of allCategories; let i = index">
+              <a (click)="collapseMenu(i)" href="javascript:void(0)" [innerHtml]="category.name"></a>
+              <ul class="sub-menu collapse" [ngClass]="{'show': allCategories[i].show}" [id]="category.slug">
+                <li>
+                    <a (click)="redirect(sc.slug)" href="javascript:void(0)" *ngFor="let sc of category.sub_categories" [innerHtml]="sc.name"></a>
+                </li>
               </ul>
           </li>
       </ul>

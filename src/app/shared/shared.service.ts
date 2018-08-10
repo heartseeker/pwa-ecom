@@ -10,5 +10,6 @@ export class SharedService {
 
   isMobile = new BehaviorSubject<boolean>(null);
   cartToggle = new BehaviorSubject<boolean>(null);
+  categories = new BehaviorSubject<any>(null);
 
 }

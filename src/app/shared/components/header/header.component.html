@@ -20,49 +20,16 @@
                   <ul #classynav>
                       <li><a href="javascript:void(0)" (click)="activateMenu('categories')" (mouseover)="megamenu = true" (mouseout)="megamenu = false">Categories</a>
                           <div class="megamenu" [ngClass]="{'mega-active': megamenu, 'block': activeMenu == 'categories'}" (mouseover)="megamenu = true" (mouseout)="megamenu = false">
-                              <ul class="single-mega cn-col-4">
-                                  <li class="title">Women's Collection</li>
-                                  <li><a href="shop.html">Dresses</a></li>
-                                  <li><a href="shop.html">Blouses &amp; Shirts</a></li>
-                                  <li><a href="shop.html">T-shirts</a></li>
-                                  <li><a href="shop.html">Rompers</a></li>
-                                  <li><a href="shop.html">Bras &amp; Panties</a></li>
-                              </ul>
-                              <ul class="single-mega cn-col-4">
-                                  <li class="title">Men's Collection</li>
-                                  <li><a href="shop.html">T-Shirts</a></li>
-                                  <li><a href="shop.html">Polo</a></li>
-                                  <li><a href="shop.html">Shirts</a></li>
-                                  <li><a href="shop.html">Jackets</a></li>
-                                  <li><a href="shop.html">Trench</a></li>
-                              </ul>
-                              <ul class="single-mega cn-col-4">
-                                  <li class="title">Kid's Collection</li>
-                                  <li><a href="shop.html">Dresses</a></li>
-                                  <li><a href="shop.html">Shirts</a></li>
-                                  <li><a href="shop.html">T-shirts</a></li>
-                                  <li><a href="shop.html">Jackets</a></li>
-                                  <li><a href="shop.html">Trench</a></li>
+                              <ul class="single-mega cn-col-4" *ngFor="let category of allCategories">
+                                <li [routerLink]="['/' + category.slug]" class="title" *ngIf="category.name" [innerHtml]="category.name"></li>
+                                <li><a [routerLink]="['/' + sc.slug]" href="javascript:void(0)" *ngFor="let sc of category.sub_categories" [innerHtml]="sc.name"></a></li>
                               </ul>
                               <div class="single-mega cn-col-4">
                                   <img src="/assets/img/bg-img/bg-6.jpg" alt="">
                               </div>
                           </div>
                       </li>
-                      <li (click)="activateMenu('collection')"><a href="javascript:void(0)">Collection</a>
-                          <ul class="dropdown" [ngClass]="{'block': activeMenu == 'collection'}">
-                              <li class="title">Men's Collection</li>
-                              <li><a href="index.html">Home</a></li>
-                              <li><a href="shop.html">Shop</a></li>
-                              <li><a href="single-product-details.html">Product Details</a></li>
-                              <li><a href="checkout.html">Checkout</a></li>
-                              <li><a href="blog.html">Blog</a></li>
-                              <li><a href="single-blog.html">Single Blog</a></li>
-                              <li><a href="regular-page.html">Regular Page</a></li>
-                              <li><a href="contact.html">Contact</a></li>
-                          </ul>
-                      </li>
-                      <li (click)="activateMenu()"><a href="javascript:void(0)">Blog</a></li>
+                      <li (click)="activateMenu()"><a href="javascript:void(0)">About</a></li>
                       <li [routerLink]="['/contact']"><a href="javascript:void(0)">Contact</a></li>
                   </ul>
               </div>
