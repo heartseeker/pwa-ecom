@@ -3,26 +3,25 @@
     <!-- Single Product -->
     <div class="col-12 col-sm-6 col-lg-4" *ngFor="let product of products; let i = index">
         <div class="single-product-wrapper">
+            <!-- <pre>{{ product | json }}</pre> -->
             <!-- Product Image -->
             <div class="product-img">
-                <img src="/assets/img/product-img/product-1.jpg" alt="">
+                <img [src]="setPrimaryImage(product)">
                 <!-- Hover Thumb -->
-                <img class="hover-img" src="/assets/img/product-img/product-2.jpg" alt="">
+                <img *ngIf="setHoverImage(product)" class="hover-img" [src]="setHoverImage(product)">
 
                 <!-- Product Badge -->
-                <div class="product-badge offer-badge">
-                    <span>-50%</span>
-                </div>
+                
                 <!-- Favourite -->
                 <div class="product-favourite">
-                    <a href="javascript:void(0)" class="favme fa fa-heart"></a>
+                    <a (click)="addToFavorite(product)" href="javascript:void(0)" class="favme fa fa-heart" [ngClass]="{'favorite': product.favorite}"></a>
                 </div>
             </div>
 
             <!-- Product Description -->
             <div class="product-description">
-                <span>topshop</span>
-                <a href="single-product-details.html">
+                <span [innerHtml]="product.categories[product.categories.length - 1].name"></span>
+                <a href="javascript:void(0)" (click)="redirect(product)">
                     <h6>{{ product.name }}</h6>
                 </a>
                 <p class="product-price"><span class="old-price">${{ product.regular_price }}</span> ${{ product.price }}</p>
@@ -31,11 +30,13 @@
                 <div class="hover-content">
                     <!-- Add to Cart -->
                     <div class="add-to-cart-btn">
-                        <a href="javascript:void(0)" class="btn essence-btn">Add to Cart</a>
+                        <a (click)="addToCart(product);$event.stopPropagation()" href="javascript:void(0)" class="btn essence-btn">Add to Cart</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <app-snackbar *ngIf="snack" [show]="snack" [message]="snackbarMessage"></app-snackbar>
 
 </div>

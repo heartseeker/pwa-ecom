@@ -8,7 +8,7 @@
           <div class="classy-navbar-toggler">
               <span class="navbarToggler" (click)="menu = !menu"><span></span><span></span><span></span></span>
           </div>
-          <a [routerLink]="['/']" class="nav-brand" href="index.html"><img class="float-right" src="/assets/img/core-img/logo.png" alt=""></a>
+          <a [routerLink]="['/']" class="nav-brand" href="javascript:void(0)"><img class="float-right" src="/assets/img/core-img/logo.png" alt=""></a>
           <!-- Menu -->
           <div class="classy-menu" [ngClass]="{'menu-on': menu}">
               <!-- close btn -->
@@ -17,12 +17,12 @@
               </div>
               <!-- Nav Start -->
               <div class="classynav">
-                  <ul #classynav>
+                  <ul>
                       <li><a href="javascript:void(0)" (click)="activateMenu('categories')" (mouseover)="megamenu = true" (mouseout)="megamenu = false">Categories</a>
                           <div class="megamenu" [ngClass]="{'mega-active': megamenu, 'block': activeMenu == 'categories'}" (mouseover)="megamenu = true" (mouseout)="megamenu = false">
                               <ul class="single-mega cn-col-4" *ngFor="let category of allCategories">
-                                <li [routerLink]="['/' + category.slug]" class="title" *ngIf="category.name" [innerHtml]="category.name"></li>
-                                <li><a [routerLink]="['/' + sc.slug]" href="javascript:void(0)" *ngFor="let sc of category.sub_categories" [innerHtml]="sc.name"></a></li>
+                                <li class="title" *ngIf="category.name" [innerHtml]="category.name"></li>
+                                <li><a (click)="redirect(sc.slug)" href="javascript:void(0)" *ngFor="let sc of category.sub_categories" [innerHtml]="sc.name"></a></li>
                               </ul>
                               <div class="single-mega cn-col-4">
                                   <img src="/assets/img/bg-img/bg-6.jpg" alt="">
@@ -41,14 +41,14 @@
       <div class="header-meta d-flex clearfix justify-content-end">
           <!-- Search Area -->
           <div class="search-area">
-              <form action="#" method="post">
-                  <input type="search" name="search" id="headerSearch" placeholder="Type for search">
+              <form [formGroup]="form" action="javascript:void(0)" method="post" (ngSubmit)="find()">
+                  <input formControlName="search" type="search" name="search" id="headerSearch" placeholder="Type for search">
                   <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
               </form>
           </div>
           <!-- Favourite Area -->
           <div class="favourite-area">
-              <a href="javascript:void(0)"><img src="/assets/img/core-img/heart.svg" alt=""></a>
+              <a href="javascript:void(0)" (click)="cartToggle('favorites')"><img src="/assets/img/core-img/heart.svg" alt=""><span *ngIf="(favorite$ | async) as favorite">{{ favorite.data.length }}</span></a>
           </div>
           <!-- User Login Info -->
           <div class="user-login-info">
@@ -56,7 +56,7 @@
           </div>
           <!-- Cart Area -->
           <div class="cart-area">
-              <a href="javascript:void(0)" (click)="cartToggle()" id="essenceCartBtn"><img src="/assets/img/core-img/bag.svg" alt=""> <span>3</span></a>
+              <a href="javascript:void(0)" (click)="cartToggle('cart')" id="essenceCartBtn"><img src="/assets/img/core-img/bag.svg" alt=""> <span *ngIf="(cart$ | async) as cart">{{ cart.data.length }}</span></a>
           </div>
       </div>
 

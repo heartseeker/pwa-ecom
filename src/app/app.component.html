@@ -5,13 +5,15 @@
 <!-- Side cart area -->
 <app-side-cart-area></app-side-cart-area>
 <!-- End Side cart area -->
-      
+
 <!-- Breadcrumb area  -->
 <app-breadcrumb-area></app-breadcrumb-area>
 <!-- End Breadcrumb area  -->
 
 <!-- Body content -->
-<router-outlet></router-outlet>
+<div [@routeAnimation]="getDepth(myOutlet)">
+    <router-outlet #myOutlet="outlet"></router-outlet>
+</div>
 <!-- End Body content -->
 
 <!-- Footer -->

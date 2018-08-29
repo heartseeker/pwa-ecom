@@ -11,6 +11,14 @@ export class ProductService {
     private http: ApiService
   ) { }
 
+  findProducts(name) {
+    return new Promise((resolve) => {
+      this.http.get(`products?search=${name}&per_page=100`).subscribe(products => {
+        resolve(products);
+      });
+    });
+  }
+
   getFeaturedProducts() {
     return new Promise((resolve) => {
       this.http.get('products?featured=true&per_page=9').subscribe(products => {
@@ -21,7 +29,7 @@ export class ProductService {
 
   getProductsByCategoryId(id) {
     return new Promise((resolve) => {
-      this.http.get(`products?category=${id}&per_page=9`).subscribe(products => {
+      this.http.get(`products?category=${id}&per_page=9&orderBy=price&order=desc`).subscribe(products => {
         resolve(products);
       });
     });
