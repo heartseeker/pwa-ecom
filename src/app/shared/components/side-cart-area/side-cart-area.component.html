@@ -1,7 +1,7 @@
 <!-- ##### Right Side Cart Area ##### -->
-<div class="cart-bg-overlay" [ngClass]="{'cart-bg-overlay-on': current.open}"></div>
+<div class="cart-bg-overlay" [ngClass]="{'cart-bg-overlay-on': current?.open}"></div>
 
-<div *ngIf="current" class="right-side-cart-area" [ngClass]="{'cart-on': current.open}">
+<div *ngIf="current" class="right-side-cart-area" [ngClass]="{'cart-on': current?.open}">
 
     <!-- Cart Button -->
     <div class="cart-button">

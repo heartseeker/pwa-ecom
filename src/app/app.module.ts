@@ -7,6 +7,8 @@ import { ShopModule } from './shop/shop.module';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 // Components
 import { AppComponent } from './app.component';
@@ -14,12 +16,16 @@ import { HomeComponent } from './shop/home/home.component';
 
 // Services
 import { ApiService } from './core/api.service';
-import { environment } from '../environments/environment';
+import { MessagingService } from './core/messaging.service';
 import { StoreModule } from '@ngrx/store';
 
 // reducers
 import * as cartReducer from './store/reducers/cart.reducer';
 import * as favoriteReducer from './store/reducers/favorite.reducer';
+
+// environment
+import { environment } from './../environments/environment';
+
 
 const routes: Routes = [
   {
@@ -42,10 +48,13 @@ const routes: Routes = [
     StoreModule.forRoot({favorite: favoriteReducer.reducer, cart: cartReducer.reducer}),
     RouterModule.forRoot(routes),
     ShopModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
   ],
   providers: [
-    ApiService
+    ApiService,
+    MessagingService,
   ],
   bootstrap: [AppComponent]
 })

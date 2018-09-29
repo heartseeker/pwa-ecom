@@ -64,12 +64,15 @@ export class SideCartAreaComponent implements OnInit {
   async remove(name, i) {
     if (name === 'cart') {
       this.cartStore.dispatch(new cartActions.RemoveCart(i));
-      this.current.data.splice(i, 1);
+      console.log('index >', i);
+      console.log('before >', this.current.data);
+      // this.current.data.splice(i, 1);
+      console.log('after >', this.current.data);
       await set('cart', this.current.data);
       this.showSnackBar('Removed a product from cart');
     } else {
       this.cartStore.dispatch(new favoriteActions.RemoveFavorite(i));
-      this.current.data.splice(i, 1);
+      // this.current.data.splice(i, 1);
       await set('favorites', this.current.data);
       this.showSnackBar('Removed from favorites');
     }

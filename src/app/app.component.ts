@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { CartState } from './store/states/app.cart';
 import { FavoriteState } from './store/states/app.favorite';
 import { get } from 'idb-keyval';
-
+import { MessagingService } from './core/messaging.service';
 
 @Component({
   selector: 'app-root',
@@ -50,6 +50,7 @@ export class AppComponent implements OnInit {
     private sharedService: SharedService,
     private cartStore: Store<CartState>,
     private favoriteStore: Store<FavoriteState>,
+    private messagingService: MessagingService,
   ) {}
 
   @HostListener('window:resize', ['$event'])
@@ -58,6 +59,7 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.messagingService.init();
     this.sharedService.isMobile.next(this.isMobile());
     const initCart = await get('cart');
     initCart['map'](cart => {
